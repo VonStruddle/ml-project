@@ -1,6 +1,10 @@
+from os import getenv
 from flask import Flask, jsonify, request
+from dotenv import load_dotenv
 
 from models import Article, Paraphrase
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -36,4 +40,4 @@ def get_related_articles(article_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=getenv('DEBUG', False))

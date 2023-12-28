@@ -29,8 +29,9 @@ sentences = list(set(sentences))
 # load model (faster one for great results, could be switched to a more accurate one)
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
-# compute paraphrases for each title (could be improved by setting up a minimum score)
-paraphrases = util.paraphrase_mining(model, sentences, show_progress_bar=True)
+# compute paraphrases for each title (could be improved by setting up a minimum score, top_k can also be changed to return more paraphrases, setting at 20 only to go fast for the demo)
+paraphrases = util.paraphrase_mining(
+    model, sentences, show_progress_bar=True, top_k=20)
 
 # store paraphrases in database (could be improved by not deleting paraphrases every time. Also, could be improved by bulk inserting but would mean a higher memory usage)
 Paraphrase.delete().execute()
